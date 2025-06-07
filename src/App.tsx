@@ -1,49 +1,37 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { BrowserRouter as Router, Routes, Route } from "react-router"; // use react-router-dom, not "react-router"
 import SignIn from "./pages/AuthPages/SignIn";
 import SignUp from "./pages/AuthPages/SignUp";
 import NotFound from "./pages/OtherPage/NotFound";
-import Videos from "./pages/UiElements/Videos";
-import Images from "./pages/UiElements/Images";
-import Alerts from "./pages/UiElements/Alerts";
-import Badges from "./pages/UiElements/Badges";
-import Avatars from "./pages/UiElements/Avatars";
-import Buttons from "./pages/UiElements/Buttons";
-import LineChart from "./pages/Charts/LineChart";
-import BarChart from "./pages/Charts/BarChart";
-
-import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
+import Home from "./pages/HomePage";
+// import About from "./pages/AboutPage"; // create this page
+// import Cart from "./pages/CartPage";   // create this page
+// import ProductPage from "./pages/ProductPage"; // generic product page, you can pass product type via params
+import AppLayout from "./layout/AppLayout";
+// import HeaderNav from "./components/header/HeaderNav";
+// import AppHeader from "./layout/AppHeader";
 
-// CRM Dashboard
 export default function App() {
   return (
-    <>
-      <Router>
-        <ScrollToTop />
-        <Routes>
-          {/* Dashboard Layout */}
-          <Route element={<AppLayout />}>
-            {/* Ui Elements */}
-            <Route path="/alerts" element={<Alerts />} />
-            <Route path="/avatars" element={<Avatars />} />
-            <Route path="/badge" element={<Badges />} />
-            <Route path="/buttons" element={<Buttons />} />
-            <Route path="/images" element={<Images />} />
-            <Route path="/videos" element={<Videos />} />
+    <Router>
+      <ScrollToTop />
+      <AppLayout />
+      {/* <HeaderNav /> */}
+      {/* <AppHeader /> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
 
-            {/* Charts */}
-            <Route path="/line-chart" element={<LineChart />} />
-            <Route path="/bar-chart" element={<BarChart />} />
-          </Route>
+        {/* New routes */}
+        {/* <Route path="/about" element={<About />} />
+        <Route path="/cart" element={<Cart />} /> */}
 
-          {/* Auth Layout */}
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+        {/* Product routes with dynamic segment */}
+        {/* <Route path="/product/:category" element={<ProductPage />} /> */}
 
-          {/* Fallback Route */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
